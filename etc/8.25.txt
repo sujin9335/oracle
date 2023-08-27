@@ -1,0 +1,84 @@
+Oracle 11g xe(Expression Edition)
+
+1.DISK1 설치
+- 비밀번호: java1234
+
+2. sqldeveloper 
+무설치 파일 C:\class\dev 으로 이동
+
+------------------------------
+
+java
+- 제품명
+- 회사명 > 썬 > 오라클
+
+Oracle Database
+- 제품명
+- 회사명
+
+Database
+- 데이터베이스 > 데이터 집합
+- 관리, 운영, 보안 등.. > 데이터베이스 관리 시스템
+
+
+데이터베이스 관리 시스템
+- Database Management System
+- 오라클(DB + DBMS) > DB? DBMS?
+
+
+백그라운드 프로세스
+- 서비스(Service)
+- 데몬(Daemon) //서비스와 같은말임
+
+
+오라클 실행/종료/상태확인 //작업관리자에서 보이는걸 더 상세히 작업할수있음
+- win+R > services.msc 
+
+1. OracleServiceXE > 데이터베이스 //더블클릭후 시직유형을 수동으로(메모리를 많이먹음)
+			// 시작메뉴에서 start or stop Database로 시작 정지 가능
+
+2. OracleXENSListener > 리스너(클라이언트 도구와 연결)
+
+
+
+SQL Developer
+- 데이터베이스 클라이언트 툴
+- 눈에 안보이는 오라클에 연결해서 조작하는 프로그램
+- 개발자 <-> 중계인(데이터베이스 클라이언트) <-> 오라클(데이터베이스 서버)
+
+
+편집창 > 워크시트(접속된 계정 우클릭 > 워크시트열기) > 스크립트(파일) > *.sql
+ex01.sql저장
+
+환경설정 
+인코딩 > UTF-8
+왼쪽 코드편집기 > 글꼴
+
+
+-------------
+csv 연결방법
+테이블을 생성한후
+좌측접속에서 해당 테이블 우클릭 - 데이터 임포트 마법사
+
+
+----------------------
+
+자바 
+
+/**엔터하면
+
+/**
+* 설명~
+*
+*/
+
+이러면 ctrl 스페이스 했을때 설명나옴
+
+Document 생성
+export - javadoc 
+- 마지막 옵션에서 설정을 해야됨
+ 구글에서 자바 doc UTF-8  -locale ko_KR -encoding UTF-8 -charset UTF-8 -docencoding UTF-8
+ 프로젝트 안에 doc폴더가생김 - overview-summary.html 실행하면 doc 완성
+
+
+
