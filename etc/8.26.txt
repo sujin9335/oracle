@@ -1,0 +1,48 @@
+ex 04~
+
+오라클 SQL 디벨로퍼가 가시성이 안좋아서 Dbeaver로 교체
+dbeaver 다운 zip
+
+==
+
+SQL Developer > Oracle 전용(MySQl 지원)
+DBeaver > 모든 데이터베이스 범용
+
+==
+
+데이터베이스 - 새데이터베이스 - 오라클 선택
+
+우측 SID로 변경 - 내용 xe
+
+유저네임 hr
+비번 java1234
+
+좌측 아래 test 커넥 (다운로드 나오면 다운)
+
+==
+
+Auto-commit
+- 개발자가 commit 실행하지 않더라도,
+insert/update/delete 실행될때마다 자동으로
+commit을 호출하는 기능
+- 클라이언트 툴마다 설정이 다르다.
+- SQL Developer > Auto-commit(false)
+- DBeaver > Auto-commit(ture)
+
+- 가이드 > 일단 끈다.
+설정-연결-연결유형-중간에 auto-commit
+상단 자물쇠Auto 옆에 눌러서 메뉴얼커밋으로 변경
+
+
+- 그냥 실행하면 접속이 안되있음
+위에 드럼통 모양 눌러서 localhost접속해줘야됨
+
+==
+
+
+메서드(Method)
+- 클래스 안에서 정의한 함수
+
+함수(Function)
+- 어딘가에 소속되어 있지 않고, 독립적으로 존재
+
