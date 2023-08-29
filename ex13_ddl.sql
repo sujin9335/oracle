@@ -64,7 +64,14 @@ SELECT * FROM tblmemo
 INSERT INTO tblmemo (seq, name, memo, regdate) 
 	VALUES (1, '홍길동', '메모입니다.', sysdate);
 
+INSERT INTO tblmemo (seq, name, memo, regdate) 
+	VALUES (2, '아무개', null, sysdate);
 
+INSERT INTO tblmemo (seq, name, memo, regdate) 
+	VALUES (3, null, null, null);
+
+INSERT INTO tblmemo (seq, name, memo, regdate) 
+	VALUES (null, null, null, null);
 
 
 

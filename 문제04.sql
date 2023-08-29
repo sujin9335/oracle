@@ -30,7 +30,7 @@ SELECT sum(salary) FROM employees WHERE job_id IN ('ST_CLERK', 'SH_CLERK');
 --4. 서울에 있는 직원들의 급여 합(급여 + 수당)? tblInsa > 33,812,400
 SELECT * FROM tblinsa;
 
-SELECT * FROM tblinsa WHERE ;
+SELECT sum(basicpay + sudang) FROM tblinsa WHERE city = '서울';
 
 
 --5. 장급(부장+과장)들의 급여 합? tblInsa > 36,289,000
