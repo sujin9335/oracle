@@ -74,8 +74,9 @@ csv 연결방법
 
 이러면 ctrl 스페이스 했을때 설명나옴
 
-Document 생성
-export - javadoc 
+Document 생성 
+
+프로젝트 - export - javadoc 
 - 마지막 옵션에서 설정을 해야됨
  구글에서 자바 doc UTF-8  -locale ko_KR -encoding UTF-8 -charset UTF-8 -docencoding UTF-8
  프로젝트 안에 doc폴더가생김 - overview-summary.html 실행하면 doc 완성
