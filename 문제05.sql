@@ -66,12 +66,35 @@ FROM tblinsa;
 
 
 -- 6. tblInsa. 기획부, 영업부, 총무부, 개발부의 각각 평균 급여?
+SELECT
+	*
+FROM tblinsa;
+
+SELECT
+	buseo,
+	round(avg(basicpay))
+FROM tblinsa
+	GROUP BY buseo;
+
+
 
 -- 7. tblInsa. 남자 직원 가장 나이가 많은 사람이 몇년도 태생? 여자 직원 가장 나이가 어린 사람이 몇년도 태생?
+SELECT
+	substr(ssn, 8, 1),
+	(SELECT max(substr(ssn, 1, 2)) FROM tblinsa)
+FROM tblinsa
+	GROUP BY substr(ssn, 8, 1);
 
-
-
-
+SELECT 
+	substr(ssn, 8, 1),
+	max(CASE
+		WHEN substr(ssn, 8, 1) = 1 THEN substr(ssn, 1, 2)
+	END),
+	min(CASE
+		WHEN substr(ssn, 8, 1) = 2 THEN substr(ssn, 1, 2)
+	END)
+FROM tblinsa 
+	GROUP BY substr(ssn, 8, 1);
 
 
 
