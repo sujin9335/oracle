@@ -70,16 +70,16 @@ SELECT sysdate + 3 * 30 FROM dual;
 
 	months_between()
 	- number months_between(date, date)
-	- 식가 - 시각 = 시간(월)
+	- 시각 - 시각 = 시간(월)
 
 */
 
 SELECT
 	name,
 	round(sysdate - ibsadate) AS "근무일수",
-	round((sysdate - ibsadate) / 30) AS "근무일수",
-	round(months_between(sysdate, ibsadate)) AS "근무일수",
-	round(months_between(sysdate, ibsadate)/ 12) AS "근무일수"
+	round((sysdate - ibsadate) / 30) AS "근무일수", --대충 달(30일)로 나눔
+	round(months_between(sysdate, ibsadate)) AS "근무일수", --정확한 월 계산
+	round(months_between(sysdate, ibsadate)/ 12) AS "근무일수" -- 12달로 나눔
 FROM tblinsa;
 
 

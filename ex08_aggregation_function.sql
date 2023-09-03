@@ -29,7 +29,7 @@
 -- tblCountry 총 나라 몇개국?
 SELECT count(*) FROM tblcountry;			--14(모든 레코드, 일부 컬럼에 null 무관)
 SELECT count(name) FROM tblcountry;			--14
-SELECT count(population) FROM tblcountry;	--13
+SELECT count(population) FROM tblcountry;	--13(null값 제외)
 
 SELECT * FROM tblcountry;			--14
 SELECT name FROM tblcountry;		--14
@@ -94,7 +94,7 @@ SELECT
 			WHEN buseo NOT IN ('기획부', '총무부', '개발부') THEN '0'
 		END
 	) AS 나머지
-FROM tblinsa
+FROM tblinsa;
 
 
 
@@ -138,6 +138,7 @@ SELECT avg(basicpay) FROM tblinsa;
 
 
 -- tblCountrym. 평균 인구수?
+SELECT * FROM tblcountry;	
 SELECT avg(population) FROM tblcountry;							--15588 NULL을 제외한 평균임
 SELECT sum(population) / count(*) FROM tblcountry;				--14475 
 SELECT count(population), count(population) FROM tblcountry;	--15588
@@ -199,7 +200,6 @@ SELECT count(*), name FROM tblinsa;
 
 -- 요구사항] 평균 급여보다 더 많이 받는 직원들?
 SELECT avg(basicpay) FROM tblinsa;		-- 1556526.66666666666666666666666666666667
-
 SELECT * FROM tblinsa WHERE basicpay >= 1556526;
 SELECT * FROM tblinsa WHERE basicpay >= avg(basicpay); -- 에러 발생
 

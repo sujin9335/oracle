@@ -28,7 +28,7 @@ SELECT 1 + 1 FROM tblcomedian;
 SELECT
 	3.5678,
 	round(3.5678),
-	round(3.5678, 1),
+	round(3.5678, 1), -- 소숫점 1자리
 	round(3.5678, 2),
 	round(3.5678, 0)
 FROM dual;

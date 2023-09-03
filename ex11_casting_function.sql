@@ -71,6 +71,7 @@ FROM dual;
 
 /*
 
+
 	2. to_char(날짜)
 	- 날짜 > 문자
 	- char to_char(칼럼, 형식문자열)
@@ -95,23 +96,23 @@ FROM dual;
 */
 
 SELECT sysdate FROM dual;
-SELECT to_char(sysdate) FROM dual; --x
-SELECT to_char(sysdate, 'yyyy') FROM dual;	--년(4자리)
-SELECT to_char(sysdate, 'yy') FROM dual;	--년(2자리)
-SELECT to_char(sysdate, 'month') FROM dual;	--월(풀네임)
-SELECT to_char(sysdate, 'mon') FROM dual;	--월(약어) 영어일시 aug
-SELECT to_char(sysdate, 'mm') FROM dual;	--월(2자리)
-SELECT to_char(sysdate, 'day') FROM dual;	--요일(풀네임)
-SELECT to_char(sysdate, 'dy') FROM dual;	--요일(약어)
-SELECT to_char(sysdate, 'ddd') FROM dual;	--일(올해의 며칠)
-SELECT to_char(sysdate, 'dd') FROM dual;	--일(이번달의 며칠)
-SELECT to_char(sysdate, 'd') FROM dual;		--일(이번주의 며칠) == 요일(숫자)
-SELECT to_char(sysdate, 'hh') FROM dual;	--시(12시)
-SELECT to_char(sysdate, 'hh24') FROM dual;	--시(24시)
-SELECT to_char(sysdate, 'mi') FROM dual;	--분
-SELECT to_char(sysdate, 'ss') FROM dual;	--초
-SELECT to_char(sysdate, 'am') FROM dual;	--오전/오후
-SELECT to_char(sysdate, 'pm') FROM dual;	--오전/오후
+SELECT to_char(sysdate) FROM dual; --23/09/04
+SELECT to_char(sysdate, 'yyyy') FROM dual;	--년(4자리)            --2023
+SELECT to_char(sysdate, 'yy') FROM dual;	--년(2자리)            --23
+SELECT to_char(sysdate, 'month') FROM dual;	--월(풀네임)            --9월
+SELECT to_char(sysdate, 'mon') FROM dual;	--월(약어) 영어일시 aug  --9월
+SELECT to_char(sysdate, 'mm') FROM dual;	--월(2자리)            --09
+SELECT to_char(sysdate, 'day') FROM dual;	--요일(풀네임)          --월요일
+SELECT to_char(sysdate, 'dy') FROM dual;	--요일(약어)            --월
+SELECT to_char(sysdate, 'ddd') FROM dual;	--일(올해의 며칠)        --247
+SELECT to_char(sysdate, 'dd') FROM dual;	--일(이번달의 며칠)      --04
+SELECT to_char(sysdate, 'd') FROM dual;		--일(이번주의 며칠) == 요일(숫자) --2
+SELECT to_char(sysdate, 'hh') FROM dual;	--시(12시)              --12
+SELECT to_char(sysdate, 'hh24') FROM dual;	--시(24시)              --00
+SELECT to_char(sysdate, 'mi') FROM dual;	--분                    --22
+SELECT to_char(sysdate, 'ss') FROM dual;	--초                    --51
+SELECT to_char(sysdate, 'am') FROM dual;	--오전/오후              --오전
+SELECT to_char(sysdate, 'pm') FROM dual;	--오전/오후              --오전
 
 -- 암기 !!
 select
@@ -130,7 +131,7 @@ SELECT
 		WHEN to_char(ibsadate, 'd') IN ('1', '7') THEN '휴일 입사'
 		ELSE '평일입사'
 	END
-FROM tblinsa
+FROM tblinsa;
 
 
 -- 요일별 입사 인원수?
@@ -167,7 +168,7 @@ SELECT * FROM tblinsa
 SELECT
 	'123' * 2, --암시적 형변환
 	to_number('123') * 2
-FROM dual
+FROM dual;
 
 
 

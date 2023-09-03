@@ -133,6 +133,7 @@ SELECT * FROM TBLINSA
 */
 
 -- tblInsa 개발부
+
 SELECT * FROM TBLINSA 
 	WHERE BUSEO = '개발부' OR BUSEO = '총무부' OR BUSEO = '홍보부';
 

@@ -21,8 +21,8 @@ FROM employees;
 SELECT
 	'abc',
 	initcap('abc'),	-- 첫문자를 대문자로
-	initcap('abc')	-- 나머지 문자는 소문자로
-FROM dual
+	initcap('aBC')	-- 나머지 문자는 소문자로
+FROM dual;
 
 -- 이름(first_name)에 'an' 포함된 직원 > 대소문자 구분없이
 SELECT
@@ -51,7 +51,7 @@ SELECT
 	address,
 	substr(address, 3, 5),
 	substr(address, 3)
-FROM tbladdressbook
+FROM tbladdressbook;
 
 
 SELECT
@@ -126,11 +126,11 @@ SELECT
 	'안녕하세요. 홍길동님.',
 	instr('안녕하세요. 홍길동님.', '홍길동') AS r1,
 	instr('안녕하세요. 홍길동님.', '아무개') AS r2,
-	instr('안녕하세요. 홍길동님. 홍길동님', '홍길동') AS r3,
-	instr('안녕하세요. 홍길동님. 홍길동님', '홍길동', 11) AS r4,
+	instr('안녕하세요. 홍길동님. 홍길동님', '홍길동') AS r3, --처음 홍길동
+	instr('안녕하세요. 홍길동님. 홍길동님', '홍길동', 11) AS r4, -- 11이후 홍길동
 	instr('안녕하세요. 홍길동님. 홍길동님', '홍길동', 
-			instr('안녕하세요. 홍길동님.', '홍길동')+LENGTH('홍길동')) AS r5,
-	instr('안녕하세요. 홍길동님. 홍길동님', '홍길동', -1) AS r6
+			instr('안녕하세요. 홍길동님.', '홍길동')+LENGTH('홍길동')) AS r5, --처음 찾은 홍길동 이후
+	instr('안녕하세요. 홍길동님. 홍길동님', '홍길동', -1) AS r6 --역순 홍길동
 FROM dual;
 
 
@@ -146,7 +146,7 @@ FROM dual;
 
 SELECT
 	lpad('a', 5),		-- %5s
-	lpad('a', 5, 'b'),
+	lpad('a', 5, 'b'),  -- 나머지문자 b로채움
 	lpad('aa', 5, 'b'),
 	lpad('aaa', 5, 'b'),
 	lpad('aaaa', 5, 'b'),

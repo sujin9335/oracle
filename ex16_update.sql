@@ -19,7 +19,7 @@ ROLLBACK;
 SELECT * FROM tblcountry;
 
 -- 대한민국: 서울 > 세종
-UPDATE tblcountry SET capital = '세종';
+UPDATE tblcountry SET capital = '세종'; -- 이럴경우 모든 capital이 세종으로 바뀜 //트렌젝션 처리를 해야됨
 
 UPDATE tblcountry SET capital = '세종' WHERE name = '대한민국';
 

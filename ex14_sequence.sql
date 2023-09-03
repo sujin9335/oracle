@@ -54,7 +54,7 @@ SELECT seqNum.nextVal FROM dual;
 
 /*
 
-	시쿤스 객체 생성하기
+	시퀀스 객체 생성하기
 	
 	create sequence 시퀀스명;
 	
