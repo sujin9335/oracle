@@ -97,7 +97,18 @@ FROM tblinsa
 	GROUP BY substr(ssn, 8, 1);
 
 
+SELECT
+	decode(substr(ssn, 8, 1), 1, substr(ssn, 1, 2)),
+	decode(substr(ssn, 8, 1), 2, substr(ssn, 1, 2))
+	--substr(ssn, 8, 1)
+FROM tblinsa;
 
+
+
+select
+    '19' || min(decode(substr(ssn, 8, 1), '1', substr(ssn, 1, 2))),
+    '19' || max(decode(substr(ssn, 8, 1), '2', substr(ssn, 1, 2)))
+from tblInsa;
 
 
 
