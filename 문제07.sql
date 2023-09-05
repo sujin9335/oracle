@@ -1,5 +1,10 @@
--- employees. 'Munich' 도시에 위치한 부서에 소속된 직원들 명단?
+-- empolyees. 'Munich' 도시에 위치한 부서에 소속된 직원들 명단?
+SELECT * FROM employees;
 
+SELECT 
+	* 
+FROM locations
+	WHERE city = 'Munich';
 
 
 -- tblMan. tblWoman. 서로 짝이 있는 사람 중 남자와 여자의 정보를 모두 가져오시오.
