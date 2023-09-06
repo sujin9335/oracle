@@ -1,0 +1,17 @@
+CREATE SEQUENCE GENRE_Seq;
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '액션');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '어드벤처');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), 'SF');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '스릴러');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '드라마');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '코미디');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '판타지');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '애니메이션');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '가족');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '범죄');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '미스터리');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '공포');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '로맨스');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '멜로');
+insert into mTBLGENRE values ((SELECT nvl(max(GENRE_Seq), 0) + 1 FROM mTBLGENRE), '뮤지컬');
+drop SEQUENCE GENRE_Seq;

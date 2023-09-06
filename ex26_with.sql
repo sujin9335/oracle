@@ -86,7 +86,7 @@ DELETE FROM tblitem;
 
 INSERT INTO tblitem (seq, name, color) 
 			VALUES ((SELECT nvl(max(seq),0) + 1 FROM tblItem), '마우스', 'white');
-
+			-- null 이 허용 되지 않을때 (SELECT nvl(max(seq),0) + 1 FROM tblItem)로 쓰면됨
 
 		
 --2.
