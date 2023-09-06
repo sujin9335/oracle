@@ -1,0 +1,6 @@
+CREATE SEQUENCE moriSeq;
+INSERT INTO mTBLORIGINLIST values(moriSeq.nextVal, 22, 1);
+INSERT INTO mTBLORIGINLIST values(moriSeq.nextVal,33,2);
+INSERT INTO mTBLORIGINLIST values(moriSeq.nextVal,34,3);
+INSERT INTO mTBLORIGINLIST values(moriSeq.nextVal,50,4);
+DROP SEQUENCE moriSeq;

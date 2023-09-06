@@ -138,7 +138,7 @@ FROM tblinsa;
 
 SELECT
 	name, buseo, basicpay,
-	(SELECT jikwi FROM tblinsa) -- 오류 60개이상 나와야되서
+    (SELECT jikwi FROM tblinsa) -- 오류 60개이상 나와야되서
 FROM tblinsa;
 
 SELECT

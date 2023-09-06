@@ -86,7 +86,7 @@ FROM tblinsa
 	GROUP BY buseo;
 
 
--- 다중 그룹
+-- 다중 그룹 (부서와 직위를 한묶음으로 본다)
 SELECT 
 	buseo, 
 	jikwi,

@@ -1,5 +1,5 @@
 CREATE SEQUENCE LINE_Seq;
-INSERT INTO mTBLLINE (LINE_Seq, movieLine) values (1,1,'누가 5야?');
+INSERT INTO mTBLLINE (LINE_Seq, movieLine) values ((SELECT nvl(max(LINE_Seq), 0) + 1 FROm mTBLLINE) ,'누가 5야?');
 INSERT INTO mTBLLINE (LINE_Seq, movieLine) values ((SELECT nvl(max(LINE_Seq), 0) + 1 FROm mTBLLINE) ,'너 납치된 거야.');
 INSERT INTO mTBLLINE (LINE_Seq, movieLine) values ((SELECT nvl(max(LINE_Seq), 0) + 1 FROm mTBLLINE) ,'돌아오는 법도 가르쳐야죠.');
 INSERT INTO mTBLLINE (LINE_Seq, movieLine) values ((SELECT nvl(max(LINE_Seq), 0) + 1 FROm mTBLLINE) ,'우리 가족은 하나야.그것이 강점이자 약점이지.');
