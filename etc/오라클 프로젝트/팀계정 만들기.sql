@@ -1,9 +1,14 @@
 
-create user project4team identified by java1234;
+create user p2 identified by java1234;
 
-grant connect, resource, dba to project4team; --hr
+grant connect, resource, dba to p2; --hr
 
 alter user project4team account lock;
 alter user project4team account unlock;
 
 select * from tabs;
+
+-- 테이블 만들어진시간
+SELECT *
+FROM ALL_OBJECTS
+WHERE OBJECT_TYPE = 'TABLE';

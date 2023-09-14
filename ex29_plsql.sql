@@ -676,6 +676,8 @@ end;
 
 */
 
+set serveroutput on;
+
 declare 
     vname tblInsa.name%type;
 begin

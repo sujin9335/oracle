@@ -12,6 +12,7 @@ is
 begin
     vname := pid;
     select logintype into vtype from tblLogin where id = pid and pw = ppw; 
+   
     if vtype = '관리자' then
         dbms_output.put_line('관리자 ' || vname || '님 안녕하세요');
         dbms_output.put_line('1. 기초 정보 관리');
@@ -114,35 +115,7 @@ begin
 
 end teacherSelec;
 
--------------------------------------------------------------------
 
---교사 상세기능 2-2-? 
-create or replace procedure teacherSelec(
-    pinput in number
-)
-is
-    vnum number;
-begin
-    vnum := pinput;
-
-    if vnum = 1 then
-        dbms_output.put_line('1. 강의 예정');
-        dbms_output.put_line('2. 강의 중');
-        dbms_output.put_line('3. 강의 종료');
-    elsif vnum = 2 then
-        dbms_output.put_line('1. 과목 선택(배점 입력)');
-    elsif vnum = 3 then
-        dbms_output.put_line('1. 과목 선택(성적 입력)');
-    elsif vnum = 4 then
-        dbms_output.put_line('1. 강의 별 출결 조회');
-        dbms_output.put_line('2. 기간 별 출결 조회');
-        dbms_output.put_line('3. 과정 별 출결 조회');
-        dbms_output.put_line('4. 인원 별 출결 조회');
-    else
-        dbms_output.put_line('잘못입력 하셨습니다');
-    end if;
-
-end teacherSelec;
 
 -------------------------------------------------------------------
 
@@ -166,9 +139,74 @@ begin
 
 end studentSelec;
 
+-------------------------------------------------------------------
 
+--기초정보 조회 1-2-1
+--create or replace procedure basicList(
+--    pinput in number,
+--    pcursor out sys_refcursor
+--)
+--is
+--    vnum number;
+--
+--begin
+--    vnum := pinput;
+--
+----    select * from tblclassroom;
+--
+--    if vnum = 1 then
+--        dbms_output.put_line('1. 강의실 명');
+--            open pcursor
+--            for
+--            select CLASSROOMNAME, CLASSROOMMAXPEOPLE  from tblclassroom order by CLASSROOMNAME;
+--       
+----    elsif vnum = 2 then
+----     
+----    elsif vnum = 3 then
+----        
+----    elsif vnum = 4 then
+--       
+--    else
+--        dbms_output.put_line('잘못입력 하셨습니다');
+--    end if;
+--
+--end basicList;
 
+--기초정보 조회 1-2-1
+create or replace procedure basicList(
+    pinput in number
+)
+is
+    vnum number;
+    vcursor sys_refcursor; --커서 참조 변수
+    vrow tblclassroom%rowtype;
+begin
+    vnum := pinput;
 
+--    select * from tblclassroom;
+
+    if vnum = 1 then
+        dbms_output.put_line('1. 강의실 명');
+            open vcursor
+            for
+            select CLASSROOMNAME, CLASSROOMMAXPEOPLE  from tblclassroom order by CLASSROOMNAME;
+        
+        loop 
+            fetch vcursor into vrow;
+            exit when vcursor%notfound;
+            dbms_output.put_line('강의실명: ' || vrow.classroomname || ' 강의실 인원수:' || vrow.CLASSROOMMAXPEOPLE);
+        end loop;
+--    elsif vnum = 2 then
+--     
+--    elsif vnum = 3 then
+--        
+--    elsif vnum = 4 then
+       
+    else
+        dbms_output.put_line('잘못입력 하셨습니다');
+    end if;
+
+end basicList;
 
 
 
