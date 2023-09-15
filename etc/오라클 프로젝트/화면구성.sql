@@ -1,8 +1,11 @@
 
 --로그인 
 begin
-    login('조성진', '1432698');
+--    login('현민정','1621433'); -- 교육생
+    login('염현빈','1534265'); -- 관리자
 end;
+--select logintype from tblLogin where id = '현민정' and pw = '1621433'
+
 /
 ----------------------------------
 --관리자 선택
@@ -24,20 +27,81 @@ begin
 end;
 /
 ----------------------------------
-declare
-    vcursor sys_refcursor; --커서 참조 변수
-    vrow tblclassroom%rowtype;
+--2-1-2-1. 기초 정보 목록 출력
 begin
-    basicList(1, vcursor);
---    loop 
---        fetch vcursor into vrow;
---        exit when vcursor%notfound;
---        dbms_output.put_line(vrow.classroomname);
---        
---    end loop;
+    --강의실, 교재, 과목
+    basicList('과목');
 end;
-
+/
+----------------------------------
+--2-1-2-2. 강의실 insert
 begin
-    basicList(1);
-    함수(1,20);
+    classLoomInsert(7,30);
 end;
+/
+----------------------------------
+--2-1-2-2. 걍의실 이름 수정
+begin
+    classLoomNameUpdate(7,8);
+end;
+/
+----------------------------------
+--2-1-2-2. 강의실 인원 수정
+begin
+    classLoomSuUpdate(8, 27);
+end;
+/
+----------------------------------
+--2-1-2-2. 강의실 삭제
+begin
+    classLoomDelete(8);
+end;
+/
+----------------------------------
+--2-1-2-2. 교재 insert
+begin
+    --교재명, 출판사
+    bookInsert('쌍용코드','바른이름');
+end;
+/
+----------------------------------
+--2-1-2-2. 교재 이름 수정
+begin
+    --번호, 바꿀이름
+    bookNameUpdate(42,'바른이름');
+end;
+----------------------------------
+--2-1-2-2. 교재 출판사 수정
+begin
+    --번호, 바꿀출판사
+    bookPublisherUpdate(42,'바른이름');
+end;
+/
+----------------------------------
+--2-1-2-2. 교재 출판사 삭제
+begin
+    --번호
+    bookDelete(42);
+end;
+/
+----------------------------------
+--2-1-2-2. 과목 insert
+begin
+    --과목이름
+    subInsert('쌍용코드');
+end;
+/
+----------------------------------
+--2-1-2-2. 과목 수정
+begin
+    --번호 바꿀이름
+    subNameUpdate(36,'쌍용오라클');
+end;
+/
+----------------------------------
+--2-1-2-2. 과목 삭제
+begin
+    --번호
+    subDelete(36);
+end;
+/
