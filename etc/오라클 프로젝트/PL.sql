@@ -19,7 +19,7 @@ is
 begin
     vname := pid;
     select basicSeq, logintype into pseq, vtype from tblLogin where id = pid and pw = ppw; 
-    dbms_output.put_line(vtype);
+    
     if vtype = '관리자' then
 
         dbms_output.put_line('관리자 ' || vname || '님 안녕하세요');
@@ -31,23 +31,24 @@ begin
         dbms_output.put_line('6. 출결 관리 및 조회');
     elsif vtype = '교사' then
        
-        dbms_output.put_line('교사 ' || vname || '님 안녕하세요');
+        dbms_output.put_line(pseq || '번 ' || '교사 ' || vname || '님 안녕하세요');
         dbms_output.put_line('1, 강의 스케줄 조회');
         dbms_output.put_line('2. 배점 입출력');
         dbms_output.put_line('3. 성적 입출력');
         dbms_output.put_line('4. 출결 관리 및 출결 조회');
     elsif vtype = '교육생' then 
+        
         select 이름, 번호, 과정명, 과정시작일, 과정종료일, 강의실 into pname, pphon, psub, pstart, pend, pcr from vwStudent where 번호 = pseq;
-        dbms_output.put_line(pname || psub || pstart || pend || pcr);
-        dbms_output.put_line('교육생 ' || vname || '님 안녕하세요');
+        dbms_output.put_line(psub || ' ' || pseq || '번 교육생 ' || vname || '님 안녕하세요');
+        dbms_output.put_line(pcr || ' 강의실' ||' 기간: ' || pstart || '~' || pend);
         dbms_output.put_line('1, 성적 조회');
         dbms_output.put_line('2, 출결 관리 및 출결 조회');
 
     end if;
---exception
---    when others then
+exception
+    when others then
 
---        dbms_output.put_line('로그인 실패');
+        dbms_output.put_line('로그인 실패');
 end login;
 /
 -------------------------------------------------------------------
@@ -218,7 +219,7 @@ is
 begin
    insert into tblClassroom values (pname, psu);
 end classLoomInsert;
-
+/
 
 -------------------------------------------------------------------------
 create or replace procedure classLoomNameUpdate( --클레스룸 이름 수정
@@ -231,7 +232,7 @@ begin
         classroomname = pinput 
             where classroomname = pname;
 end classLoomNameUpdate;
-
+/
 
 -------------------------------------------------------------------------
 create or replace procedure classLoomSuUpdate( --클레스룸 인원 수정
@@ -244,7 +245,7 @@ begin
         classroomMaxPeople = pinput 
             where classroomname = pname;
 end classLoomSuUpdate;
-
+/
 -------------------------------------------------------------------------
 create or replace procedure classLoomDelete( --클레스룸 삭제
     pname tblClassroom.classroomname%type
@@ -253,7 +254,7 @@ is
 begin
     DELETE FROM tblClassroom WHERE classroomname = pname;
 end classLoomDelete;
-
+/
 -------------------------------------------------------------------------
 create or replace procedure bookInsert( --교재 INSERT
     pname tblBook.bookname%type,
@@ -327,10 +328,135 @@ begin
     DELETE FROM tblSubject WHERE subseq = pseq;
 end subDelete;
 /
+------------------------------------------------------------------------- 교육생기능
+
+create or replace procedure subSelectList( --성적조회 전 과목선택출력
+    pseq vwStudent.번호%type
+)
+is
+    vsub vwStudent.과정명%type;
+    vcursor sys_refcursor;
+    vrow vwsublist%rowtype;
+begin
+    select 과정명 into vsub from vwstudent where 번호 = pseq;
+    open vcursor
+    for
+    select * from vwsublist where 과정이름 = vsub;
+    dbms_output.put_line(vsub);
+    loop
+        fetch vcursor into vrow;
+        exit when vcursor%notfound;
+        dbms_output.put_line('과목명: ' || vrow.과목이름);
+    end loop;
+    
+end subSelectList;
+/
+
+------------------------------------------------------------------------- 
+
+create or replace procedure scoreList( --성적조회
+    pseq vwStudent.번호%type,
+    psub vwsublist.과목이름%type
+)
+is
+    vsub vwStudent.과정명%type;    --입력받은 학생의 과정명
+    vrow vwsublist%rowtype;
+    vrow2 vwscore%rowtype;
+
+begin
+    select 과정명 into vsub from vwstudent where 번호 = pseq;
+    select * into vrow from vwsublist where 과정이름 = vsub and 과목이름 = psub;
+    select * into vrow2 from vwscore where 번호 = pseq and 과목이름 = psub;
+    dbms_output.put_line(vsub);
+    dbms_output.put_line('과목번호: ' || vrow.리스트번호);
+    dbms_output.put_line('과목명: ' || vrow.과목이름);
+    dbms_output.put_line('과목기간: ' || vrow.과목시작일 || ' ~ ' || vrow.과목종료일);
+    dbms_output.put_line('교재: ' || vrow.교재);
+    dbms_output.put_line('교사: ' || vrow.교사);
+    dbms_output.put_line('출결 배점: ' || vrow.출결배점);
+    dbms_output.put_line('필기 배점: ' || vrow.필기배점 || ' 시험일: ' || vrow.필기시험일);
+    dbms_output.put_line('실기 배점: ' || vrow.실기배점 || ' 시험일: ' || vrow.실기시험일);
+    dbms_output.put_line('출결점수: ' || vrow2.출결점수);
+    dbms_output.put_line('필기점수: ' || vrow2.필기점수);
+    dbms_output.put_line('실기점수: ' || vrow2.실기점수);
+    
+end scoreList;
+/
+------------------------------------------------------------------------- 
+
+create or replace procedure workIn( -- 출석등록
+    pseq tblattendanceStatus.atsSeq%type
+)
+is
+begin
+    insert into tblattendanceStatus values ((SELECT nvl(max(atsSeq),0) + 1 from tblattendanceStatus), pseq, default, null);
+end workIn;
+/
+------------------------------------------------------------------------- 
+
+create or replace procedure workout( -- 퇴근등록
+    pseq tblattendanceStatus.atsSeq%type
+)
+is
+    pin number;
+    pout number;
+begin
+    update tblattendanceStatus set
+        stout = default 
+            where studentseq = pseq;
+    select to_char(stin, 'hh24'), to_char(stout, 'hh24') into pin, pout from tblattendanceStatus where studentseq = pseq;
+
+    if pin < 9 and pout >= 18 then
+        INSERT INTO tblAttendance 
+            VALUES ((SELECT nvl(max(attendanceSeq),0) + 1 from tblAttendance),pseq,(select processSeq from tblstudent where studentseq = pseq),sysdate,'정상');
+    elsif pin >= 9 and pout >= 18 then
+        INSERT INTO tblAttendance 
+            VALUES ((SELECT nvl(max(attendanceSeq),0) + 1 from tblAttendance),pseq,(select processSeq from tblstudent where studentseq = pseq),sysdate,'지각');
+    else 
+        INSERT INTO tblAttendance 
+            VALUES ((SELECT nvl(max(attendanceSeq),0) + 1 from tblAttendance),pseq,(select processSeq from tblstudent where studentseq = pseq),sysdate,'조퇴');
+    end if;
+end workout;
+/
+-------------------------------------------------------------------
+
+create or replace procedure workCheck(--출석 조회
+    pinput varchar2,
+    pstdate date,
+    pendate date
+)
+is
+    vcursor sys_refcursor; --커서 참조 변수
+    vrow tblAttendance%rowtype;
+
+begin
+    open vcursor
+    for
+    select 
+        *
+    from tblAttendance 
+        where AttendanceDate >= pstdate 
+            and AttendanceDate < to_date((pendate || ' 23:59:59'), 'yy-mm-dd hh24:mi:ss')
+            and studentseq = pinput;
+    
+    loop 
+        fetch vcursor into vrow;
+        exit when vcursor%notfound;
+        dbms_output.put_line('=======================================');
+        dbms_output.put_line(vrow.AttendanceDate || ' 상태: '|| vrow.AttendanceStatus);
+        
+    end loop;
+    dbms_output.put_line('=======================================');
+
+
+end workCheck;
+/
 ----------------------------------
 begin
-    --번호
-    subDelete(36);
+    --학생번호 (로그인해서 나오는 번호)
+    workCheck(146, '23/07/16', '23/07/17');
 end;
 /
-select * from tblSubject;
+select * from vwsublist;
+select * from vwStudent;
+select * from tblScoreInfo;

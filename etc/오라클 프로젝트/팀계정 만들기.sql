@@ -15,3 +15,5 @@ WHERE OBJECT_TYPE = 'TABLE';
 
 --&입력끄기
 SET DEFINE OFF;
+
+commit;
