@@ -16,7 +16,7 @@ from tblStudent s
     inner join tblCourse c
         on s.processSeq = c.courseseq;
         
-select * from vwStudent where 번호 = 1;
+
 
 create or replace view vwSubList
 as
@@ -48,8 +48,6 @@ from tblsubjectList sl
                                                 on sl.courseSeq = sc.subjectListSeq;
             
         
-select * from vwsublist;
-select * from tblsubjectList;
 
 create or replace view vwscore
 as
@@ -63,16 +61,53 @@ from tblScoreInfo si
     inner join vwSubList vs
         on si.subjectListSeq = vs.리스트번호; 
 
+---------------------------------------------------------관리자-개설과정
+create or replace view vwCourseList
+as
+select
+    t1.courseSeq AS "과정번호",
+    t1.courseName AS "과정명",
+    TO_CHAR(t1.courseStartDate, 'yyyy-mm-dd') AS "개설과정시작일",
+    TO_CHAR(t1.courseFinishDate, 'yyyy-mm-dd') AS "개설과정종료일",
+    t2.classRoomName AS "강의실명",
+    t1.subjectRegistrationStatus AS "과목등록여부",
+    t1.studentNumber AS "교육생인원수"    
+from tblcourse t1
+         inner join TBLCLASSROOM t2
+                ON t1.classroomName = t2.classroomName; 
 
 
 
 
 
 
+---------------------------------------------------------교사
+create or replace view vwTeacherSchedule
+as
+select 
+    sl.subseq as 과목번호, sch.teacherseq as 교사번호, sl.courseseq as 과정번호, c.coursename as 과정명, c.coursestartdate as 과정시작일, c.coursefinishdate as 과정종료일, 
+    c.classroomname as 강의실, s.subname as 과목명, sl.subjectstartdate as 과목시작일, sl.subjectfinishdate as 과목종료일,
+    b.bookname as 교재명, c.studentnumber as 교육생등록인원,
+    case
+        when sl.subjectstartdate > sysdate and sl.subjectfinishdate > sysdate then '강의예정'
+        when sl.subjectstartdate < sysdate and sl.subjectfinishdate > sysdate then '강의중'
+        when sl.subjectfinishdate < sysdate then '강의종료'
+    end as 강의진행여부
+from tblSchedule sch
+    inner join tblSubjectList sl
+        on sch.subjectlistseq = sl.subjectlistseq
+            inner join tblCourse c
+                on sl.courseseq = c.courseseq
+                    inner join tblBook b
+                        on sl.bookseq = b.bookseq
+                            inner join tblSubject s
+                                on sl.subseq = s.subseq
+order by sl.subjectstartdate asc;
 
 
 
 
+commit;
 
 
 

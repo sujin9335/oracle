@@ -1,0 +1,48 @@
+create or replace procedure login(
+    pid in varchar2,
+    ppw in varchar2
+)
+is
+    vtype varchar2(30);
+    vname varchar2(30);
+    pseq vwStudent.번호%type;
+    pname vwStudent.이름%type;
+    pphon vwStudent.번호%type;
+    psub vwStudent.과정명%type;
+    pstart vwStudent.과정시작일%type;
+    pend vwStudent.과정종료일%type;
+    pcr vwStudent.강의실%type;
+begin
+    vname := pid;
+    select basicSeq, logintype into pseq, vtype from tblLogin where id = pid and pw = ppw; 
+    
+    if vtype = '관리자' then
+
+        dbms_output.put_line('관리자 ' || vname || '님 안녕하세요');
+        dbms_output.put_line('1. 기초 정보 관리');
+        dbms_output.put_line('2. 교사 계정 관리');
+        dbms_output.put_line('3. 개설 과정 관리');
+        dbms_output.put_line('4. 교육생 관리');
+        dbms_output.put_line('5. 시험 관리 및 성적 조회');
+        dbms_output.put_line('6. 출결 관리 및 조회');
+    elsif vtype = '교사' then
+       
+        dbms_output.put_line(pseq || '번 ' || '교사 ' || vname || '님 안녕하세요');
+        dbms_output.put_line('1, 강의 스케줄 조회');
+        dbms_output.put_line('2. 배점 입출력');
+        dbms_output.put_line('3. 성적 입출력');
+        dbms_output.put_line('4. 출결 관리 및 출결 조회');
+    elsif vtype = '교육생' then 
+        
+        select 이름, 번호, 과정명, 과정시작일, 과정종료일, 강의실 into pname, pphon, psub, pstart, pend, pcr from vwStudent where 번호 = pseq;
+        dbms_output.put_line(psub || ' ' || pseq || '번 교육생 ' || vname || '님 안녕하세요');
+        dbms_output.put_line(pcr || ' 강의실' ||' 기간: ' || pstart || '~' || pend);
+        dbms_output.put_line('1, 성적 조회');
+        dbms_output.put_line('2, 출결 관리 및 출결 조회');
+
+    end if;
+exception
+    when others then
+
+        dbms_output.put_line('로그인 실패');
+end login;
