@@ -51,10 +51,6 @@ CREATE TABLE reservation (
 
 --데이터 추가
 
---drop table reservation;
---drop table director;
---drop table schedule_movie;
---drop table member;
 
 INSERT INTO member VALUES ('son', '1234', '손재옥', 'M', '010-7361-9876', default);
 INSERT INTO member VALUES ('kim', '1234', '김영주', 'M', '010-6712-7652', default);
@@ -158,15 +154,7 @@ from reservation r
                         order by r.regdate desc; 
 
 
---select * from schedule_movie;
---select * from member;
---select * from director;
---select * from reservation;
 
---생성한 테이블 4개와 시퀀스를 backup_자신이름_전화번호뒷자리.dmp 로 백업하세요.
---백업한 파일은 .sql과 함께 제출한다.
---콘솔창에서 아래 입력
--- > exp user_ksj/java1234@xe file=backup_ksj_1234.dmp
 
 
 
